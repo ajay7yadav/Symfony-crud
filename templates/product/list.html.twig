@@ -1,0 +1,33 @@
+<h1>Product List</h1>
+
+<a href="/product/new">➕ Add New Product</a>
+<br><br>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+                <a href="{{ path('product_show', {id: product.id}) }}">Show</a> |
+                <a href="{{ path('product_edit', {id: product.id}) }}">Edit</a> |
+                <form method="post" action="{{ path('product_delete', {id: product.id}) }}" style="display:inline;" onsubmit="return confirm('Delete this product?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">No products found.</td>
+        </tr>
+    {% endfor %}
+</table>

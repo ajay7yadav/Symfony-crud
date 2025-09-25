@@ -3,3 +3,51 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# This is my manual route
+product_list :
+    # URI ( route )
+    path: /product
+    # Which function do you want to use
+    controller: App\Controller\ProductController::index
+
+# product_show :
+#     path: /product/{id}
+#     controller: App\Controller\ProductController::show
+#     requirements:
+#         id: '\d+' # only allow numbers
+
+# product_new :
+#     path: /product/new
+#     controller: App\Controller\ProductController::new
+#     methods: [GET, POST]
+
+# Now connected to DB
+product_lists :
+    path: /products
+    controller: App\Controller\ProductController::list
+
+product_new :
+    path: /product/new
+    controller: App\Controller\ProductController::add
+    methods: [GET, POST]
+
+product_edit :
+    path: /product/{id}/edit
+    controller: App\Controller\ProductController::edit
+    requirements:
+        id: '\d+'
+    methods: [GET, POST]
+
+product_delete:
+    path: /product/{id}/delete
+    controller: App\Controller\ProductController::delete
+    requirements:
+        id: '\d+'
+    methods: [POST]
+
+product_show :
+    path: /product/{id}
+    controller: App\Controller\ProductController::getById
+    requirements:
+        id: '\d+' # only allow numbers
